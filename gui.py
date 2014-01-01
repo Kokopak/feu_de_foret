@@ -8,9 +8,9 @@ from pygame.locals import *
 
 import foret
 
-SIZE_CELL = 32
-W = 30
-H = 30
+SIZE_CELL = 8
+W = 200
+H = 120
 
 
 class Gui:
@@ -66,7 +66,7 @@ class Gui:
                         mc, mr = mc / SIZE_CELL, mr / SIZE_CELL
                         self.foret.grille[(mc, mr)].etat = foret.Cell.FEU
             if not self.step_by_step:
-                time.sleep(0.1)
+                #time.sleep(0.1)
                 self.foret.next()
                 self.draw()
 

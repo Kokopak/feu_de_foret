@@ -21,21 +21,21 @@ class Cell:
         self.next_etat = None
 
     def __repr__(self):
+        return "%d/%d=%d" % (self.r, self.c, self.etat)
+
+    def __str__(self):
         return str(self.etat)
 
     def calc_next(self, voisins = None):
-        self.next_etat = self.etat
         if self.etat == Cell.CENDRE:
             self.next_etat = Cell.VIDE
         elif self.etat == Cell.FEU:
             self.next_etat = Cell.CENDRE
-        elif self.etat == Cell.ARBRE:
-            for v in voisins:
-                if v.etat == Cell.FEU:
-                    self.next_etat = Cell.FEU
 
     def set_next(self):
-        self.etat = self.next_etat
+        if self.next_etat is not None :
+            self.etat = self.next_etat
+        self.next_etat = None
 
 class Foret:
     def __init__(self, w, h, p=0.5):
@@ -77,7 +77,12 @@ class Foret:
 
     def next(self):
         for cell in self.grille.values() :
-            cell.calc_next(self.get_voisins(cell))
+            if cell.etat == Cell.FEU :
+                for c in self.get_voisins(cell):
+                    if c.etat == Cell.ARBRE:
+                        #print repr(cell), repr(c)
+                        c.next_etat = Cell.FEU
+            cell.calc_next()
         for cell in self.grille.values() :
             cell.set_next()
 
