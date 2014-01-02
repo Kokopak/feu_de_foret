@@ -38,14 +38,16 @@ class Cell:
         self.next_etat = None
 
 class Foret:
+
     def __init__(self, w, h, p=0.5):
         self.w = w
         self.h = h
 
-        self.grille = {}
-        for r in range(self.h) :
-            for c in range(self.w) :
-                self.grille[(r, c)] = Cell(r, c, p=p)
+        #self.grille = {}
+        #for r in range(self.h) :
+        #    for c in range(self.w) :
+        #        self.grille[(r, c)] = Cell(r, c, p=p)
+        self.grille = {(r, c) : Cell(r, c, p=p) for r in range(self.h) for c in range(self.w)}
 
     def feu_alea(self):
         while True :
