@@ -8,16 +8,18 @@ from pygame.locals import *
 
 import foret
 
-SIZE_CELL = 8
-W = 200
-H = 120
+SIZE_CELL = 16
+W = 80
+H = 64
 
 
 class Gui:
     def __init__(self, step_by_step=False):
         pygame.init()
 
-        self.screen = pygame.display.set_mode((W * SIZE_CELL , H * SIZE_CELL))
+        flags = DOUBLEBUF
+        self.screen = pygame.display.set_mode((W * SIZE_CELL , H * SIZE_CELL), flags)
+        self.screen.set_alpha(None)
         pygame.display.set_caption("Feu")
 
         self.start = False
@@ -66,7 +68,6 @@ class Gui:
                         mc, mr = mc / SIZE_CELL, mr / SIZE_CELL
                         self.foret.grille[(mc, mr)].etat = foret.Cell.FEU
             if not self.step_by_step:
-                #time.sleep(0.1)
                 self.foret.next()
                 self.draw()
 

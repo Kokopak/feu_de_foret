@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import random
-import numpy as np
 
 class Cell:
     VIDE = 0
